@@ -96,6 +96,15 @@ class Person {
 
 
   }
+
+  // metodo toString()
+  toString() {
+
+    const optlastname2 = this.#lastname2 ? `, LastName2: ${this.#lastname2}` : "";
+    const optPicture = this.#picture ? `, picture: ${this.#picture}` : "";
+
+    return `Name: ${this.#name}, LastName1: ${this.#lastname1} ${optlastname2}, Born: ${this.#born.toLocaleDateString()} ${optPicture}`;
+  }
 }
 
 export { Person };

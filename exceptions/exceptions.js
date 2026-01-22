@@ -23,3 +23,10 @@ class EmptyValueException extends BaseException {
     this.name = "EmptyValueException";
   }
 }
+
+// exportar excepciones
+export {
+  BaseException,
+  InvalidAccessConstructorException,
+  EmptyValueException,
+}

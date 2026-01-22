@@ -3,5 +3,6 @@
 import { testPerson } from "./test/testPerson.js";
 
 
-// ejecutar prueba
-testPerson();
+// ejecutar pruebas
+
+// testPerson();

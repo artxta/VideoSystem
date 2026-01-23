@@ -44,4 +44,11 @@ class Category {
   set description(value) {
     this.#description = value;
   }
+
+  // toString()
+  toString() {
+    return `Name: ${this.#name}, Description: ${this.#description}`;
+  }
 }
+
+export {Category}

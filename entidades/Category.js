@@ -22,7 +22,7 @@ class Category {
     this.#name = name;
     this.#description = description;
 
-
+    this.name = "Category";
   }
 
   // metodos get y set
@@ -51,4 +51,4 @@ class Category {
   }
 }
 
-export {Category}
+export { Category }

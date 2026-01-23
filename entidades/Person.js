@@ -33,6 +33,8 @@ class Person {
     this.#born = date;
     this.#picture = picture;
 
+    this.name = "Person";
+
     // name
     Object.defineProperty(this, 'name', {
       enumerable: true,

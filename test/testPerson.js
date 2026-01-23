@@ -15,7 +15,7 @@ function testPerson() {
   );
 
   // comprobar metodo
-  console.log("=> TestPerson <=\n");
+  console.log("=> Test Objeto Person <=\n");
   console.log("toString()\n " + juanillo.toString());
 
   // comprobar set()
@@ -37,4 +37,5 @@ function testPerson() {
   console.log("=============================================");
 }
 
+// exportar la clase
 export { testPerson };

@@ -24,9 +24,20 @@ class EmptyValueException extends BaseException {
   }
 }
 
+// excepción clase abstracta
+class AbstractClassException extends BaseException {
+  constructor(className, fileName, lineNumber) {
+    super(`Error: La clase ${className} es abstracta`, fileName, lineNumber);
+    this.className = className;
+    this.name = "AbstractClassException";
+  }
+
+}
+
 // exportar excepciones
 export {
   BaseException,
   InvalidAccessConstructorException,
   EmptyValueException,
+  AbstractClassException,
 }

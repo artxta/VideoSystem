@@ -2,7 +2,7 @@
 
 
 // importar clase Resource
-import { Resource } from "../entidades/Resource.js";
+import { Resource } from "../entities/Resource.js";
 
 // función test
 function testResource() {

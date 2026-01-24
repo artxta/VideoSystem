@@ -1,7 +1,7 @@
 "use strict";
 
 // importar clase Production
-import { Production } from "../entidades/Production.js";
+import { Production } from "../entities/Production.js";
 
 // function prueba
 function testProduction() {

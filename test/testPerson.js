@@ -1,7 +1,7 @@
 "use strict";
 
 // importar Person
-import { Person } from "../entidades/Person.js";
+import { Person } from "../entities/Person.js";
 
 // función de prueba
 function testPerson() {

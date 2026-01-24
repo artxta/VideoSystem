@@ -1,6 +1,6 @@
 "use strict";
 
-import { Category } from "../entidades/Category.js";
+import { Category } from "../entities/Category.js";
 
 function testCategory() {
   console.log("=> Test Objeto Category <=");

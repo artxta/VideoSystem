@@ -52,7 +52,7 @@ class Resource {
 
   // toString()
   toString() {
-    return `Duration: ${this.#duration}, Link: ${this.#link}`;
+    return `Duration: ${this.#duration}, Link: ${this.#link}\n`;
   }
 
 }

@@ -34,10 +34,21 @@ class AbstractClassException extends BaseException {
 
 }
 
+// excepción Clase no correcta
+class WrongClass extends BaseException {
+  constructor(classOk, classNoOk, fileName, lineNumber) {
+    super(`Error: La clase ${classNoOk} No es la adecuada, deberia ser ${classOk}`,
+      fileName, lineNumber);
+    this.className = className;
+    this.name = "WrongClass";
+  }
+}
+
 // exportar excepciones
 export {
   BaseException,
   InvalidAccessConstructorException,
   EmptyValueException,
   AbstractClassException,
+  WrongClass,
 }

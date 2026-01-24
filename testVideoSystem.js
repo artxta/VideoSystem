@@ -6,6 +6,7 @@ import { testResource } from "./test/testResource.js";
 import { testProduction } from "./test/testProduction.js";
 import { testMovie } from "./test/testMovie.js";
 import { testSerie } from "./test/testSerie.js";
+import { testUser } from "./test/testUser.js";
 
 // ejecutar pruebas
 
@@ -14,4 +15,5 @@ import { testSerie } from "./test/testSerie.js";
 // testResource();
 // testProduction();
 // testMovie();
-testSerie();
+// testSerie();
+testUser();

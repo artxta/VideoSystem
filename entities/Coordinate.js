@@ -48,7 +48,7 @@ class Coordinate {
 
   // metodo toString()
   toString() {
-    return `Latitude: ${this.#latitude}, Longitud: ${this.#longitude}`;
+    return `Latitude: ${this.#latitude}, Longitud: ${this.#longitude}\n`;
   }
 
 }

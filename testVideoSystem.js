@@ -5,6 +5,7 @@ import testCategory from "./test/testCategory.js";
 import { testResource } from "./test/testResource.js";
 import { testProduction } from "./test/testProduction.js";
 import { testMovie } from "./test/testMovie.js";
+import { testSerie } from "./test/testSerie.js";
 
 // ejecutar pruebas
 
@@ -12,4 +13,5 @@ import { testMovie } from "./test/testMovie.js";
 // testCategory();
 // testResource();
 // testProduction();
-testMovie();
+// testMovie();
+testSerie();

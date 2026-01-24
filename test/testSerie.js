@@ -38,6 +38,7 @@ function testSerie() {
   newSerie.image = "imagenFuturama.jpg";
   newSerie.resources = [new Resource(123, "link")];
   newSerie.locations = [new Coordinate(1, 2)];
+  newSerie.seasons = 13;
 
   console.log("se ha modoficado el objeto");
 
@@ -49,7 +50,9 @@ function testSerie() {
     Synopsis: ${newSerie.synopsis}
     Image: ${newSerie.image}
     Resources: ${newSerie.resources}
-    Locations: ${newSerie.locations}`);
+    Locations: ${newSerie.locations}
+    Temporadas: ${newSerie.seasons}`);
+
 }
 
 // exportar función

@@ -113,6 +113,9 @@ class Serie extends Production {
       salida += `${l.toString()}`;
     }
 
+    salida += "Temporadas: ";
+    salida += this.#seasons;
+
     return salida;
 
   }

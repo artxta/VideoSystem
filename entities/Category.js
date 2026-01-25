@@ -22,7 +22,8 @@ class Category {
     this.#name = name;
     this.#description = description;
 
-    this.name = "Category";
+    // this.name = "Category";
+
   }
 
   // metodos get y set
@@ -38,10 +39,12 @@ class Category {
 
   // description
   get description() {
+
     return this.#description;
   }
 
   set description(value) {
+    if (value === null || value === undefined) throw new EmptyValueException("description");
     this.#description = value;
   }
 

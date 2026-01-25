@@ -39,8 +39,38 @@ class WrongClass extends BaseException {
   constructor(classOk, classNoOk, fileName, lineNumber) {
     super(`Error: La clase ${classNoOk} No es la adecuada, deberia ser ${classOk}`,
       fileName, lineNumber);
-    this.className = className;
+    this.classNoOk = classNoOk;
+    this.classOk = classOk;
     this.name = "WrongClass";
+  }
+}
+
+// Excepciones expecificas para VideoSystem
+
+// categoria ya existe
+class CategoryExist extends BaseException {
+  constructor(className, fileName, lineNumber) {
+    super(`Error: La categoria ${className} ya existe.`, fileName, lineNumber);
+    this.className = className;
+    this.name = "CategoryExist";
+  }
+}
+
+// categoria no existe
+class CategoryNoRegistrada extends BaseException {
+  constructor(className, fileName, lineNumber) {
+    super(`Error: No esta registrada la categoria ${className}`, fileName, lineNumber);
+    this.className = className;
+    this.name = "CategoryNoRegistrada";
+
+  }
+}
+
+// no borrar categoria por defecto
+class CategoryDefaultException extends BaseException {
+  constructor(fileName, lineNumber) {
+    super("No puedes borrar la categoria por defecto", fileName, lineNumber);
+    this.name = "CategoryDefaultException";
   }
 }
 
@@ -51,4 +81,8 @@ export {
   EmptyValueException,
   AbstractClassException,
   WrongClass,
+  CategoryExist,
+  CategoryNoRegistrada,
+  CategoryDefaultException,
 }
+

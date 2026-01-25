@@ -115,6 +115,12 @@ class Production {
       syn +
       img
   }
+
+  // metodo clone() para copiar el set
+  // clone() {
+  //   throw new AbstractClassException("Production");
+  // }
+
 }
 
 // exportar

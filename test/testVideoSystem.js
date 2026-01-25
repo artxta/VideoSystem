@@ -68,6 +68,23 @@ const futurama = new Serie(
   [new Coordinate(30, 30)]
 );
 
+// añadir Actores Objetos Person
+const javier = new Person(
+  "Javier",
+  "Barden",
+  undefined,
+  new Date(1969, 2, 1),
+  "JavierBarden.jpg"
+);
+
+const penelope = new Person(
+  "Penelope",
+  "Cruz",
+  undefined,
+  new Date(1974, 3, 28),
+  "Penelope.jpg"
+);
+
 // función de testeo de VideoSystem
 function testVideoSystem() {
   console.log("=> Test VideoSystem <=");
@@ -134,6 +151,18 @@ function testVideoSystem() {
   let tamanio = videoM.removeProduction(simpson, silentHill);
   console.log("tamaño actual " + tamanio);
   console.log([...videoM.productions]);
+
+  // añadir actor
+  console.log("Añadir Actores => addActor(javier, penelope);");
+  videoM.addActor(javier, penelope);
+  console.log("Mostrar actores añadidos con iterator");
+  console.log(...videoM.actors);
+
+  console.log("Borrar un actor: removeActor(penelope)");
+  const tamanioActors = videoM.removeActor(penelope);
+  console.log("Número de actores ahora: " + tamanioActors);
+  console.log(...videoM.actors);
+
 
 
 

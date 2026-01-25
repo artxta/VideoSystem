@@ -36,6 +36,7 @@ let VideoSystem = (function () {
     #categories = new Map();
     #users = new Map();
     #productions = new Map();
+    #actors = new Map();
 
     constructor() {
       // si no se usa new
@@ -100,6 +101,26 @@ let VideoSystem = (function () {
         get() {
           // obtiene los production
           const valor = this.#productions.values();
+          // devuelve el iterator
+          return {
+            [Symbol.iterator]() {
+              return {
+                next() {
+                  const { done, value } = valor.next();
+                  return { done, value: done ? undefined : value };
+                }
+              }
+            }
+          }
+        }
+      });
+
+      // Getter actors
+      Object.defineProperty(this, 'actors', {
+        enumerable: true,
+        get() {
+          // obtiene los actors
+          const valor = this.#actors.values();
           // devuelve el iterator
           return {
             [Symbol.iterator]() {
@@ -238,7 +259,7 @@ let VideoSystem = (function () {
       for (const p of productions) {
         // comprobar entrada
         if ((p === null) || (p === undefined)) throw new EmptyValueException("productions");
-        if (!(p instanceof Production)) throw new WrongClass("Proction", c.name);
+        if (!(p instanceof Production)) throw new WrongClass("Production", c.name);
         if (!this.#productions.has(p.title)) throw new ObjetoNoExiste(c.name);
 
         // eliminar
@@ -249,7 +270,38 @@ let VideoSystem = (function () {
     }
 
 
+    // getters actor en propiedades del constructor
 
+    // addActor()
+    addActor(...actors) {
+      for (const a of actors) {
+        // comprobar entrada
+        if ((a === null) || (a === undefined)) throw new EmptyValueException("actors");
+        if (!(a instanceof Person)) throw new WrongClass("Person");
+        if (this.#actors.has(a)) throw new ObjetoYaExiste(a.name);
+
+        // añadir el actor
+        this.#actors.set(a.name, a);
+      }
+      return this.#actors.size;
+    }
+
+    // removeActor
+    removeActor(...actors) {
+      for (const a of actors) {
+        // comprobar entrada
+        if ((a === null) || (a === undefined)) throw new EmptyValueException("actors");
+        if (!(a instanceof Person)) throw new WrongClass("Person");
+        if (!this.#actors.has(a.name)) throw new ObjetoNoExiste(a.name);
+
+        // elimina el actor
+        this.#actors.delete(a.name);
+      }
+      // devuelve el número de actores
+      return this.#actors.size;
+    }
+
+    // Getter Director implementado en propiedades
 
   }
 

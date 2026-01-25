@@ -74,6 +74,23 @@ class CategoryDefaultException extends BaseException {
   }
 }
 
+// excepción Propiedad existe
+class ObjetoYaExiste extends BaseException {
+  constructor(objeto, fileName, lineNumber) {
+    super(`Error: el objeto ${objeto} ya existe`, fileName, lineNumber);
+    this.name = "ObjetoYaExiste";
+
+  }
+}
+
+// excepción Propiedad no existe
+class ObjetoNoExiste extends BaseException {
+  constructor(objeto, fileName, lineNumber) {
+    super(`Error: el objeto ${objeto} NO existe en el sistema`);
+    this.name = "ObjetoNoExiste";
+  }
+}
+
 // exportar excepciones
 export {
   BaseException,
@@ -84,5 +101,7 @@ export {
   CategoryExist,
   CategoryNoRegistrada,
   CategoryDefaultException,
+  ObjetoYaExiste,
+  ObjetoNoExiste,
 }
 

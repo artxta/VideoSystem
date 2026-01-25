@@ -32,8 +32,10 @@ let VideoSystem = (function () {
   // clase VideoSystem
   class VideoSystem {
     #name = "VideoSystem"; // nombre del sistema por defecto
+    // iterators
     #categories = new Map();
     #users = new Map();
+    #productions = new Map();
 
     constructor() {
       // si no se usa new
@@ -55,13 +57,17 @@ let VideoSystem = (function () {
       Object.defineProperty(this, 'categories', {
         enumerable: true,
         get() {
-          // obtiene las categories
-          const keys = this.#categories.keys();
-          // devuelve un iterador
+          const values = this.#categories.keys();
+          // devuelve un iterador reutilizable
           return {
-            *[Symbol.iterator]() {
-              for (const c of keys) {
-                yield c;
+            [Symbol.iterator]() {
+              // devuelve un iterator
+              return {
+                next() {
+                  const { done, value } = values.next();
+                  // función ternaria para ver el final
+                  return { done, value: done ? undefined : value }
+                }
               }
             }
           }
@@ -72,13 +78,36 @@ let VideoSystem = (function () {
       Object.defineProperty(this, 'users', {
         enumerable: true,
         get() {
-          // obtiene los users
-          const valor = this.#users.values();
-          // devuelve un iterator
+          const values = this.#users.values();
+          // devuelve un iterator reutilizable
           return {
-            *[Symbol.iterator]() {
-              for (const c of valor) {
-                yield c;
+            [Symbol.iterator]() {
+              return {
+                next() {
+                  const { done, value } = values.next();
+                  // 
+                  return { done, value: done ? undefined : value };
+                }
+              }
+            }
+          }
+        }
+      });
+
+      // Getter productions
+      Object.defineProperty(this, 'productions', {
+        enumerable: true,
+        get() {
+          // obtiene los production
+          const valor = this.#productions.values();
+          // devuelve el iterator
+          return {
+            [Symbol.iterator]() {
+              return {
+                next() {
+                  const { done, value } = valor.next();
+                  return { done, value: done ? undefined : value };
+                }
               }
             }
           }
@@ -180,12 +209,44 @@ let VideoSystem = (function () {
         // eliminar usuario
         this.#users.delete(c.username);
         // devolver tamaño de usuarios
-        return this.#users.size;
       }
+      return this.#users.size;
     }
 
     // getter productions en propiedades de constructor
 
+    // addProduction()
+    addProduction(...productions) {
+      for (const c of productions) {
+        // comprobar entrada
+        if ((c === null) || (c === undefined)) throw new EmptyValueException("productions");
+        if (!(c instanceof Production)) throw new WrongClass("Production", c);
+        // si tiene el mismo titulo y fecha es la misma Production
+        if ((this.#productions.has(c.title)) && (this.#productions.has(c.publication))) {
+          throw new ObjetoYaExiste(c);
+        }
+
+        // añadir Production
+
+        this.#productions.set(c.title, c);
+
+      }
+    }
+
+    // removeProduction()
+    removeProduction(...productions) {
+      for (const p of productions) {
+        // comprobar entrada
+        if ((p === null) || (p === undefined)) throw new EmptyValueException("productions");
+        if (!(p instanceof Production)) throw new WrongClass("Proction", c.name);
+        if (!this.#productions.has(p.title)) throw new ObjetoNoExiste(c.name);
+
+        // eliminar
+        this.#productions.delete(p.title);
+      }
+      // devolver tamaño de elementos
+      return this.#productions.size;
+    }
 
 
 

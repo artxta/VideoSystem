@@ -26,6 +26,48 @@ const ataulfo = new User("Ataulfo", "afaulfo_71@gmail.com", "1234");
 const user2 = new User("Santiago", "santi_@gmail.com", "pasS");
 const user3 = new User("Capi", "cappii@gmail.com", "pass1234");
 
+// production 
+//Movie
+const elCuervo = new Movie(
+  "The Crow",
+  "EEUU",
+  new Date(2024, 0, 1),
+  "Synopsis: trata de venganza",
+  "El Cuervo.jpg",
+  new Resource(120, "El Cuervo.mkv"),
+  [new Coordinate(12, 12)]
+);
+
+const silentHill = new Movie(
+  "Silent Hill",
+  "EEUU",
+  new Date(2006, 0, 1),
+  "Una madre busca a su hija en silent hill",
+  "SilentHill.jpg",
+  new Resource(150, "SilentHill1.mkv"),
+  [new Coordinate(13, 13)]
+);
+
+const simpson = new Serie(
+  "Los simpsons",
+  "EEUU",
+  new Date(1989, 11, 17),
+  "Los simpsons de toda la vida",
+  "simsons.jpg",
+  new Resource(30, "los Simpsons.mkv"),
+  [new Coordinate(14, 14)]
+);
+
+const futurama = new Serie(
+  "Futurama",
+  "EEUU",
+  new Date(1999, 11, 31),
+  "Fry se congela y aparece en el futuro",
+  "Futurama.jpg",
+  new Resource(30, "futurama.mkv"),
+  [new Coordinate(30, 30)]
+);
+
 // función de testeo de VideoSystem
 function testVideoSystem() {
   console.log("=> Test VideoSystem <=");
@@ -62,6 +104,7 @@ function testVideoSystem() {
   // probar removeCategory
   videoM.removeCategory(romantica);
   // mostrar categorias ahora
+  console.log("categorias ahora: ");
   console.dir([...videoM.categories]);
 
 
@@ -78,9 +121,24 @@ function testVideoSystem() {
   console.log("Borrar usuario : Ataulfo");
   videoM.removeUser(ataulfo);
   // ver usuarios ahora
+  console.log("usuarios ahora: ");
   console.log([...videoM.users]);
 
-  
+  // añadir production
+  console.log("addProduction: ");
+  videoM.addProduction(elCuervo, simpson, silentHill, futurama);
+  console.log("Probar iterator Productions");
+  console.log([...videoM.productions]);
+
+  console.log("borrar production: simpson, silentHill");
+  let tamanio = videoM.removeProduction(simpson, silentHill);
+  console.log("tamaño actual " + tamanio);
+  console.log([...videoM.productions]);
+
+
+
+
+
 
 
 

@@ -37,6 +37,7 @@ let VideoSystem = (function () {
     #users = new Map();
     #productions = new Map();
     #actors = new Map();
+    #directors = new Map();
 
     constructor() {
       // si no se usa new
@@ -121,6 +122,26 @@ let VideoSystem = (function () {
         get() {
           // obtiene los actors
           const valor = this.#actors.values();
+          // devuelve el iterator
+          return {
+            [Symbol.iterator]() {
+              return {
+                next() {
+                  const { done, value } = valor.next();
+                  return { done, value: done ? undefined : value };
+                }
+              }
+            }
+          }
+        }
+      });
+
+      // Getter Director
+      Object.defineProperty(this, 'directors', {
+        enumerable: true,
+        get() {
+          // obtiene los actores
+          const valor = this.#directors.values();
           // devuelve el iterator
           return {
             [Symbol.iterator]() {
@@ -277,7 +298,7 @@ let VideoSystem = (function () {
       for (const a of actors) {
         // comprobar entrada
         if ((a === null) || (a === undefined)) throw new EmptyValueException("actors");
-        if (!(a instanceof Person)) throw new WrongClass("Person");
+        if (!(a instanceof Person)) throw new WrongClass("Person", a.name);
         if (this.#actors.has(a)) throw new ObjetoYaExiste(a.name);
 
         // añadir el actor
@@ -291,7 +312,7 @@ let VideoSystem = (function () {
       for (const a of actors) {
         // comprobar entrada
         if ((a === null) || (a === undefined)) throw new EmptyValueException("actors");
-        if (!(a instanceof Person)) throw new WrongClass("Person");
+        if (!(a instanceof Person)) throw new WrongClass("Person", a.name);
         if (!this.#actors.has(a.name)) throw new ObjetoNoExiste(a.name);
 
         // elimina el actor
@@ -302,6 +323,72 @@ let VideoSystem = (function () {
     }
 
     // Getter Director implementado en propiedades
+
+    // addDirector
+    addDirector(...directors) {
+      for (const dir of directors) {
+        // comprobar entrada
+        if ((dir === null) || (dir === undefined)) throw new EmptyValueException("directors");
+        if (!(dir instanceof Person)) throw new WrongClass("Person", dir.name);
+        if (this.#directors.has(dir.name)) throw new ObjetoYaExiste(dir.name || "no definido");
+
+        // añade el objeto
+        this.#directors.set(dir.name, dir);
+      }
+      // devolver número de directores
+      return this.#directors.size;
+    }
+
+    // removeDirector()
+    removeDirector(...directors) {
+      for (const dir of directors) {
+        // comprobar entrada
+        if ((dir === null) || (dir === undefined)) throw new EmptyValueException("directors");
+        if (!(dir instanceof Person)) throw new WrongClass("Person", dir.name);
+        if (!this.#directors.has(dir.name)) throw new ObjetoNoExiste(dir.name || "no definido");
+
+        // borra el director
+        this.#directors.delete(dir.name);
+      }
+      return this.#directors.size;
+    }
+
+    // assignCategory
+    // Asigna uno más producciones a una categoría.
+    // Si el objeto Category o Production no existen se añaden al sistema.
+    assignCategory(category, ...production) {
+      // comprobar entrada
+      if ((category === null) || (category === undefined)) throw new EmptyValueException("category");
+      if (!(category instanceof Category)) throw new WrongClass("Category", category.name);
+      // flyweight solo se crea si no existe
+      if (!(this.#categories.has(category))) {
+        this.addCategory(category);
+      }
+
+      // obtejer categoria
+      const categoriaGuardar = this.#categories.get(category);
+      // recorrer el rest
+      for (const pro of production) {
+
+        if ((pro === null) || (pro === undefined)) throw new EmptyValueException("production");
+        if (!(pro instanceof Production)) throw new WrongClass("production", pro.name);
+
+        // comprobar si existe la categoria o la production
+        // category si no existe se crea
+        // production si no existe se crea
+        if (!(this.#productions.has(pro.title))) {
+          this.addProduction(pro);
+        }
+
+        // asignar las productions a la categoria
+        categoriaGuardar.add(pro);
+
+      }
+
+      // devolver el número de produccions asignadas a la categoria
+      return this.#categories.get(category).size;
+
+    }
 
   }
 

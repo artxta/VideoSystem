@@ -201,7 +201,16 @@ assignActor(penelope, elCuervo, silentHill, simpson, futurama, scaryMovie);`);
   console.log("Casting para Futurama:");
   console.log(...futur);
 
-  
+  console.log("");
+
+  // comprobar getProductionsDirector
+  videoM.assignDirector(steven, scaryMovie, silentHill, elCuervo);
+  console.log("assignDirector(steven, scaryMovie, silentHill, elCuervo);");
+  console.log("comprobar getProductionsDirector(steven)");
+  const proDirector = videoM.getProductionsDirector(steven);
+  console.log(...proDirector);
+
+  console.log("");
 
 
 

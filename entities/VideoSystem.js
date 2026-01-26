@@ -571,6 +571,34 @@ let VideoSystem = (function () {
       };
     }
 
+    // getProductionsDirector
+    getProductionsDirector(director) {
+      // comprobar entrada
+      if (director === null || director === undefined) throw new EmptyValueException("director");
+      if (!(director instanceof Person)) throw new WrongClass("Director", director.name);
+
+      // si el director no existe
+      if (!this.#directors.has(director)) throw new ObjetoNoExiste("Director", director.name);
+
+      const pro = Array.from(this.#directors.get(director));
+      let indice = 0;
+
+      // devolver iterator 
+      return {
+        [Symbol.iterator]() {
+          return {
+            next() {
+              if (indice < pro.length) {
+                return { value: pro[indice++], done: false };
+              }
+              return { value: undefined, done: true };
+            }
+          };
+        }
+      };
+    }
+
+
 
 
   }

@@ -19,6 +19,7 @@ const accion = new Category("Acción", "Categoria Acción");
 const drama = new Category("Drama", "Categoria Drama");
 const terror = new Category("Terror", "Categoria Terror");
 const romantica = new Category("Romantica", "Categoria Romantica");
+const comedia = new Category("Comedia", "Categoria Comedia");
 
 // usuarios
 const ataulfo = new User("Ataulfo", "afaulfo_71@gmail.com", "1234");
@@ -67,6 +68,16 @@ const futurama = new Serie(
   [new Coordinate(30, 30)]
 );
 
+const scaryMovie = new Movie(
+  "Scary Movie",
+  "EEUU",
+  new Date(2000, 0, 1),
+  "Una pelicula de miedo y humor",
+  "ScaryMovie.jpg",
+  new Resource(120, "ScaryMovie.torrent"),
+  [new Coordinate(45, 90)]
+);
+
 // añadir Actores Objetos Person
 const javier = new Person(
   "Javier",
@@ -113,6 +124,7 @@ export {
   drama,
   terror,
   romantica,
+  comedia,
   ataulfo,
   user2,
   user3,
@@ -120,6 +132,7 @@ export {
   silentHill,
   simpson,
   futurama,
+  scaryMovie,
   javier,
   penelope,
   steven,

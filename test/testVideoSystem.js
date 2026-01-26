@@ -36,6 +36,8 @@ import {
   steven,
   alfred,
   scorsese,
+  scaryMovie,
+  comedia,
 } from "./testObjetosPrueba.js";
 
 // función de testeo de VideoSystem
@@ -51,7 +53,7 @@ function testVideoSystem() {
   console.log(videoM);
   console.log("Nombre Sistema: " + videoM.name);
 
-  console.log("Añadir Categorias");
+  console.log("Añadir Categorias: accion, drama, terror, romantica");
 
   // addCategory
   videoM.addCategory(accion, drama, terror, romantica);
@@ -63,7 +65,7 @@ function testVideoSystem() {
     vercategorias += cat.name + ", ";
   }
   console.log("Ver iterator Categories: \n" + vercategorias);
-  console.log("añadir categoria repetida, para ver excepción");
+  console.log("añadir categoria \"romantica\" repetida, para ver excepción");
   try {
     videoM.addCategory(romantica);
   } catch (error) {
@@ -78,7 +80,7 @@ function testVideoSystem() {
   console.dir([...videoM.categories]);
 
 
-  console.log("añadir usuarios:");
+  console.log("añadir usuarios: ataulfo, user2, user3");
   videoM.addUser(ataulfo, user2, user3);
 
   let verUsuarios = "   ";
@@ -95,7 +97,7 @@ function testVideoSystem() {
   console.log([...videoM.users]);
 
   // añadir production
-  console.log("addProduction: ");
+  console.log("addProduction: elCuervo, simpson, silentHill, futurama");
   videoM.addProduction(elCuervo, simpson, silentHill, futurama);
   console.log("Probar iterator Productions");
   console.log([...videoM.productions]);
@@ -117,24 +119,40 @@ function testVideoSystem() {
   console.log(...videoM.actors);
 
   // añadir directores
-  console.log("añadir Directores");
+  console.log("añadir Directores: steven, alfred, scorsese");
   videoM.addDirector(steven, alfred, scorsese);
   // iterator directors
   console.log("mostrar iterator de directores añadidos: ");
   console.log(...videoM.directors);
 
   // borrar directors
-  console.log("Borrar director: ");
+  console.log("Borrar director: alfred");
   console.log("número de directores ahora: " + videoM.removeDirector(alfred));
   console.log(...videoM.directors);
 
+  console.log(`Asignar Producciones a una categoria 
+    assignCategory  terror (silent Hill, el Cuervo, futurama) `);
+  const totalProductions = videoM.assignCategory(terror, silentHill, elCuervo, futurama);
+  console.log("Total de producciones asignadas a la categoria terror: " + totalProductions);
 
-  console.log("Asignar Producciones a una categoria");
+  console.log(`deassignCategory terror: quitar \"futurama\"`);
+  const totalProductions1 = videoM.deassignCategory(terror, futurama);
+  console.log("Total de producciones asignadas a la categoria terror: " + totalProductions1);
 
+  // si Category o Production no existen se añaden al sistema
+  console.log("Si Category o Production no existe se añaden al sistema:");
+  const totalProductions2 = videoM.assignCategory(comedia, scaryMovie);
+  console.log(`assignCategory: comedia (scary Movie)`);
+  console.log("Total de productions de category comedia: " + totalProductions2);
 
+  console.log("Asignar Productions a un director: ")
+  console.log("assignDirector(steven, scaryMovie, elCuervo)  ");
+  const totalProductions3 = videoM.assignDirector(steven, scaryMovie, elCuervo);
+  console.log("Productions asignadas a Director \"Steven\": " + totalProductions3);
 
-
-
+  console.log("desasignar una production a Director Steven: scaryMovie");
+  const totalProductions4 = videoM.deassignDirector(steven, scaryMovie);
+  console.log("Productions asignadas a Director \"Steven\": " + totalProductions4);
 
 
 

@@ -55,7 +55,8 @@ const simpson = new Serie(
   "Los simpsons de toda la vida",
   "simsons.jpg",
   new Resource(30, "los Simpsons.mkv"),
-  [new Coordinate(14, 14)]
+  [new Coordinate(14, 14)],
+  35
 );
 
 const futurama = new Serie(
@@ -65,7 +66,8 @@ const futurama = new Serie(
   "Fry se congela y aparece en el futuro",
   "Futurama.jpg",
   new Resource(30, "futurama.mkv"),
-  [new Coordinate(30, 30)]
+  [new Coordinate(30, 30)],
+  13
 );
 
 const scaryMovie = new Movie(

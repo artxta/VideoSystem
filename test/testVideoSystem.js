@@ -20,6 +20,7 @@ import {
   drama,
   terror,
   romantica,
+  comedia,
   // usuarios
   ataulfo,
   user2,
@@ -29,6 +30,7 @@ import {
   silentHill,
   simpson,
   futurama,
+  scaryMovie,
   // actores
   javier,
   penelope,
@@ -36,8 +38,9 @@ import {
   steven,
   alfred,
   scorsese,
-  scaryMovie,
-  comedia,
+
+
+
 } from "./testObjetosPrueba.js";
 
 // función de testeo de VideoSystem
@@ -179,6 +182,27 @@ function testVideoSystem() {
   console.log("Desasignar productions a javer: silentHill y elCuervo");
   const totalProductions6 = videoM.deassignActor(javier, silentHill, elCuervo);
   console.log("Productions asignadas ahora a Actor javier: " + totalProductions6);
+  console.log("");
+
+  // probar getCast()
+  console.log("Añadir production a actores: ");
+  console.log(`assignActor(javier, silentHill, elCuervo, simpson);
+assignActor(penelope, elCuervo, silentHill, simpson, futurama, scaryMovie);`);
+
+  videoM.assignActor(javier, silentHill, elCuervo);
+  videoM.assignActor(penelope, elCuervo, silentHill, simpson, futurama, scaryMovie);
+
+  const silen = videoM.getCast(silentHill);
+  const futur = videoM.getCast(futurama);
+
+  console.log("Casting para SilenHill:");
+  console.log(...silen);
+
+  console.log("Casting para Futurama:");
+  console.log(...futur);
+
+  
+
 
 
 

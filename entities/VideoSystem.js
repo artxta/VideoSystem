@@ -539,6 +539,39 @@ let VideoSystem = (function () {
       return actorMap.size;
     }
 
+    // getCast
+    getCast(production) {
+      // comprobar entrada
+      if ((production === null) || (production === undefined)) throw new EmptyValueException("production");
+      if (!(production instanceof Production)) throw new WrongClass("Production", production.name);
+
+      // array temporal 
+      const actores = [];
+
+      // recorrer los actores
+      for (const [actor, productions] of this.#actors) {
+        if (productions.has(production)) {
+          actores.push(actor);
+        }
+      }
+
+      // devolver iterator 
+      let indice = 0;
+      return {
+        [Symbol.iterator]() {
+          return {
+            next() {
+              if (indice < actores.length) {
+                return { value: actores[indice++], done: false };
+              }
+              return { value: undefined, done: true };
+            }
+          };
+        }
+      };
+    }
+
+
 
   }
 

@@ -286,8 +286,8 @@ let VideoSystem = (function () {
       for (const p of productions) {
         // comprobar entrada
         if ((p === null) || (p === undefined)) throw new EmptyValueException("productions");
-        if (!(p instanceof Production)) throw new WrongClass("Production", c.name);
-        if (!this.#productions.has(p.title)) throw new ObjetoNoExiste(c.name);
+        if (!(p instanceof Production)) throw new WrongClass("Production", p.name);
+        if (!this.#productions.has(p.title)) throw new ObjetoNoExiste(p.name);
 
         // eliminar
         this.#productions.delete(p.title);
@@ -480,6 +480,66 @@ let VideoSystem = (function () {
       // devuelve tamaño de productions del director
       return directorMap.size;
     }
+
+    // assignActor
+    assignActor(actor, ...productions) {
+      // comprobar entrada
+      if ((actor === null) || (actor === undefined)) throw new EmptyValueException("actor");
+      if (!(actor instanceof Person)) throw new WrongClass("Actor", actor.name);
+
+      // si no existe el actor se crea
+      if (!(this.#actors.has(actor))) {
+        this.addActor(actor);
+      }
+
+      // actor Map
+      const actorMap = this.#actors.get(actor);
+
+      // recorrer productions
+      for (const pro of productions) {
+        // comprobar entrada
+        if ((pro === null) || (pro === undefined)) throw new EmptyValueException("Production");
+        if (!(pro instanceof Production)) throw new WrongClass("Productions", pro.name);
+
+        // si no existe la production se añade
+        if (!(this.#productions.has(pro.title))) {
+          this.addProduction(pro);
+        }
+
+        // asignar esa productions al actor
+        actorMap.add(pro);
+      }
+      // devolver número de productions del actor
+      return actorMap.size;
+
+    }
+
+    // deassignActor
+    deassignActor(actor, ...productions) {
+      // comprobar entrada
+      if ((actor === null) || (actor === undefined)) throw new EmptyValueException("actor");
+      if (!(actor instanceof Person)) throw new WrongClass("Actor", actor.name);
+      // si no existe el actor lanza excepción
+      if (!(this.#actors.has(actor))) throw new ObjetoNoExiste(actor.name);
+
+      // actor Map
+      const actorMap = this.#actors.get(actor);
+
+      // recorrer productions
+      for (const pro of productions) {
+        // comprobar entrada
+        if ((pro === null) || (pro === undefined)) throw new EmptyValueException("Production");
+        if (!(pro instanceof Production)) throw new WrongClass("Productions", pro.name);
+
+        // borrar productions del actor 
+        actorMap.delete(pro);
+
+      }
+      // devuelve tamaño de productions del actor
+      return actorMap.size;
+    }
+
+
   }
 
   // Estructura SingleTon

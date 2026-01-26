@@ -226,6 +226,30 @@ assignActor(penelope, elCuervo, silentHill, simpson, futurama, scaryMovie);`);
 
   console.log("");
 
+  console.log("crear createPerson(javierYaExiste)");
+  console.log("crear createPerson(javierNoExiste)")
+  // existe
+  const javierExiste = videoM.createPerson("Javier",
+    "Barden",
+    undefined,
+    new Date(1969, 2, 1),
+    "JavierBarden.jpg"
+  );
+
+  const javierNoExiste = videoM.createPerson("Javi",
+    "Bar",
+    undefined,
+    new Date(1969, 2, 1),
+    "Jav.jpg"
+  );
+
+  console.log("comparar si son iguales: javierExiste === javier ");
+  console.log(javierExiste === javier);
+  console.log("comparar si son iguales: javierNOExiste === javier ");
+  console.log(javierNoExiste === javier);
+
+  console.log("");
+
   
 
 

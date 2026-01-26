@@ -689,6 +689,33 @@ let VideoSystem = (function () {
     }
 
 
+    // createProduction
+    createProduction(title, publication, nationality = "Sin Nacionalidad", synopsis = "Sin synopsis", image = "Sin imagen") {
+      if (!title) throw new EmptyValueException("title");
+      if (!publication) throw new EmptyValueException("publication");
+
+      const pubDate = publication instanceof Date ? publication : new Date(publication);
+
+      // Buscar en productions
+      for (const prod of this.#productions.values()) {
+        if (prod.title === title && prod.publication.getTime() === pubDate.getTime()) {
+          return prod; // instancia que ya existe
+        }
+      }
+
+      // No existe: crear nuevo objeto 
+      // al ser abstracta usa la herencia
+      return new (class extends Production { })(
+        title,
+        nationality,
+        pubDate,
+        synopsis,
+        image
+      );
+    }
+
+
+
 
 
 

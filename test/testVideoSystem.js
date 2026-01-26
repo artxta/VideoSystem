@@ -218,8 +218,15 @@ assignActor(penelope, elCuervo, silentHill, simpson, futurama, scaryMovie);`);
     console.log(p.title);
   }
 
-  
+  console.log("");
+  console.log("Probar getProductionsCategory");
+  console.log("getProductionsCategory(comedia)");
+  const categoriaProduct = videoM.getProductionsCategory(comedia);
+  console.log(...categoriaProduct);
 
+  console.log("");
+
+  
 
 
 }

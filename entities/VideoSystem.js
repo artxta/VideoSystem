@@ -626,6 +626,71 @@ let VideoSystem = (function () {
     }
 
 
+    // getProductionsCategory
+    getProductionsCategory(category) {
+      // comprobar la entrada de datos
+      if (!category) throw new EmptyValueException("category");
+      if (!(category instanceof Category)) throw new WrongClass("Category", category.name);
+      if (!this.#categories.has(category)) throw new CategoryNoRegistrada(category.name);
+
+      // guardar producciones de esa categoría
+      const productionCateg = this.#categories.get(category);
+      // convertir a array
+      const productions = Array.from(productionCateg);
+      let index = 0;
+
+      // return iterador
+      return {
+        [Symbol.iterator]() {
+          return {
+            next() {
+              if (index < productions.length) {
+                return { value: productions[index++], done: false };
+              }
+              return { value: undefined, done: true };
+            }
+          };
+        }
+      };
+    }
+
+    // createPerson
+    createPerson(name, lastname1, lastname2 = "", born, picture = "") {
+      // comprobar entrada
+      if (!name) throw new EmptyValueException("name");
+      if (!lastname1) throw new EmptyValueException("lastname1");
+      if (!born) throw new EmptyValueException("born");
+
+      // comprobar si existe
+      // ver actores
+      for (const actor of this.#actors.keys()) {
+        if (
+          actor.name === name &&
+          actor.lastname1 === lastname1 &&
+          actor.born.getTime() === new Date(born).getTime()
+        ) {
+          return actor; // Retorna actor que ya habia sido creado antes
+        }
+      }
+
+      // ver  directores
+      for (const director of this.#directors.keys()) {
+        if (
+          director.name === name &&
+          director.lastname1 === lastname1 &&
+          director.born.getTime() === new Date(born).getTime()
+        ) {
+          return director; // Retorna director existente
+        }
+      }
+
+      // si no existe, pues crear nueva Person
+      return new Person(name, lastname1, lastname2, born, picture);
+    }
+
+
+
+
 
 
   }

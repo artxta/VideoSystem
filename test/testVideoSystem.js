@@ -212,6 +212,13 @@ assignActor(penelope, elCuervo, silentHill, simpson, futurama, scaryMovie);`);
 
   console.log("");
 
+  console.log("Comprobar getProductionsActor(penelope)");
+  const producciones = videoM.getProductionsActor(penelope);
+  for (const p of producciones) {
+    console.log(p.title);
+  }
+
+  
 
 
 

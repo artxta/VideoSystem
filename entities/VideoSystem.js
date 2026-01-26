@@ -598,6 +598,33 @@ let VideoSystem = (function () {
       };
     }
 
+    // getProductionsActor
+    getProductionsActor(actor) {
+      // comprobar datos
+      if (!actor) throw new EmptyValueException("actor");
+      if (!(actor instanceof Person)) throw new WrongClass("Actor", actor.name);
+      if (!this.#actors.has(actor)) throw new ObjetoNoExiste(actor.name);
+
+      // guarda un array con las productore del actor
+      const productions = Array.from(this.#actors.get(actor));
+      let index = 0;
+
+      // devuelve el iterador
+      return {
+        [Symbol.iterator]() {
+          return {
+            next() {
+              // mientras sea menor a la longitud
+              if (index < productions.length) {
+                return { value: productions[index++], done: false };
+              }
+              return { value: undefined, done: true };
+            }
+          };
+        }
+      };
+    }
+
 
 
 
